@@ -16,6 +16,9 @@
   "bin": {
     "bitwarden-wrapper": "./cli.js"
   },
+  "peerDependencies": {
+    "dotenv": "^16.0.0"
+  },
   "author": "Sid Ahmed BRAHIMI",
   "type": "module",
   "license": "MIT",
