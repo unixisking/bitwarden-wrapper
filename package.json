@@ -1,0 +1,25 @@
+{
+  "name": "bitwarden-wrapper",
+  "version": "0.1.0",
+  "description": "A simple Node.js wrapper around the Bitwarden CLI",
+  "keywords": [
+    "bitwarden",
+    "vaultwarden",
+    "cli",
+    "wrapper",
+    "secrets"
+  ],
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "bin": {
+    "bitwarden-wrapper": "./cli.js"
+  },
+  "author": "Sid Ahmed BRAHIMI",
+  "type": "module",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}
