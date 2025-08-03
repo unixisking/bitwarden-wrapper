@@ -1,3 +1,3 @@
-import BitwardenClient from '../src/client.js'
+import BitwardenClient from './client.js'
 
-export { BitwardenClient }
+export default BitwardenClient
