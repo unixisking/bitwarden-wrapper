@@ -1,6 +1,6 @@
 {
   "name": "bitwarden-wrapper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple Node.js wrapper around the Bitwarden CLI",
   "keywords": [
     "bitwarden",
