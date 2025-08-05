@@ -119,7 +119,7 @@ class BitwardenClient {
    */
   async login() {
     try {
-      const { stdout } = await execAsync('bw login --apikey', {
+      const { stdout, stderr } = await execAsync('bw login --apikey', {
         env: {
           ...process.env,
           BW_CLIENTID: this.#clientId,
@@ -127,11 +127,17 @@ class BitwardenClient {
           BW_PASSWORD: this.#password,
         },
       })
+      if (stderr) {
+        console.error('❌ Login error:', stderr)
+        throw new Error('Login failed. Please check your credentials.')
+      }
+      console.log('🔑 Login successful:', stdout.trim())
       return stdout
     } catch (err) {
       if (!err.message.includes('already logged in')) {
         throw new Error('Login failed. Please check your credentials.')
       }
+      console.log('🔑 Already logged in, skipping login step.')
     }
   }
 
@@ -144,7 +150,7 @@ class BitwardenClient {
    */
   async unlock() {
     try {
-      const { stdout: sessionToken } = await execAsync(
+      const { stdout: sessionToken, stderr } = await execAsync(
         'bw unlock --passwordenv BW_PASSWORD --raw',
         {
           env: {
@@ -155,7 +161,12 @@ class BitwardenClient {
           },
         }
       )
+      if (stderr) {
+        console.error('❌ Unlock error:', stderr)
+        throw new Error('Unlock failed. Please check your credentials.')
+      }
       this.#session = sessionToken.trim()
+      console.log('🔓 Vault unlocked successfully.')
       return this.#session
     } catch (err) {
       console.error('❌ Authentication failed:', err.stderr || err.message)
